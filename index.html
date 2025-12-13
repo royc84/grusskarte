@@ -15,6 +15,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .card {
@@ -26,6 +27,8 @@
       padding: 2rem 1.5rem 2.5rem;
       text-align: center;
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
@@ -79,6 +82,18 @@
     audio {
       display: none;
     }
+
+    /* Konfetti-Elemente */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      border-radius: 50%;
+    }
   </style>
 </head>
 
@@ -110,9 +125,44 @@
   </div>
 
   <script>
+    const colors = ['#ff3c3c', '#ff8c42', '#fff13c', '#42ff77', '#3c90ff', '#c342ff'];
+
+    function createConfetti(x, y) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = x + 'px';
+      confetti.style.top = y + 'px';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(confetti);
+
+      let angle = Math.random() * 2 * Math.PI;
+      let speed = 2 + Math.random() * 4;
+      let vx = Math.cos(angle) * speed;
+      let vy = Math.sin(angle) * speed;
+      let gravity = 0.1;
+      let opacity = 1;
+
+      function animate() {
+        vy += gravity;
+        confetti.style.left = (parseFloat(confetti.style.left) + vx) + 'px';
+        confetti.style.top = (parseFloat(confetti.style.top) + vy) + 'px';
+        opacity -= 0.02;
+        confetti.style.opacity = opacity;
+        if (opacity > 0) requestAnimationFrame(animate);
+        else confetti.remove();
+      }
+
+      animate();
+    }
+
     function playAudio() {
       const audio = document.getElementById("audio");
       audio.play();
+
+      // Konfetti erzeugen
+      for (let i = 0; i < 50; i++) {
+        createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+      }
     }
   </script>
 </body>
