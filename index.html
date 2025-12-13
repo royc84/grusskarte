@@ -12,7 +12,7 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
       display: flex;
-      align-items: center; /* vertikal zentriert */
+      align-items: center; 
       justify-content: center;
       overflow: hidden;
       background-image: url('background.jpg');
@@ -24,7 +24,7 @@
     .card {
       width: 100%;
       max-width: 420px;
-      background: rgba(255, 255, 255, 0.4); /* 40% transparent */
+      background: rgba(255, 255, 255, 0.4); 
       border-radius: 24px;
       margin: 1rem;
       padding: 2rem 1.5rem 2.5rem;
@@ -33,19 +33,13 @@
       position: relative;
       z-index: 1;
       backdrop-filter: blur(5px);
-      transform: translateY(10vh); /* nach unten verschoben */
+      transform: translateY(10vh);
     }
 
     h1 {
       font-size: 1.6rem;
-      color: #d9445f; /* dunkleres Rosa */
-      margin-bottom: 0.5rem;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: #444; /* dunkleres Grau */
-      margin-bottom: 1.5rem;
+      color: #d9445f;
+      margin-bottom: 1rem;
     }
 
     .emoji {
@@ -55,33 +49,40 @@
 
     button {
       width: 100%;
-      font-size: 1.2rem;
-      padding: 1rem;
+      font-size: 1.5rem;
+      padding: 1.5rem;
       border-radius: 999px;
       border: none;
       background: linear-gradient(135deg, #ff8a00, #ff5e8a);
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       box-shadow: 0 6px 15px rgba(255, 94, 138, 0.4);
-      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+      margin-top: 1.5rem;
+      animation: pulse 2s infinite;
     }
 
+    /* Pulsierende Animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Glow-Effekt beim Tippen */
     button:active {
       transform: scale(0.97);
-      box-shadow: 0 4px 10px rgba(255, 94, 138, 0.3);
-    }
-
-    .hint {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      color: #444;
+      box-shadow: 0 0 25px rgba(255, 94, 138, 0.8), 0 0 50px rgba(255, 140, 130, 0.6);
+      filter: brightness(1.2);
+      animation: none; /* Animation während Tippen pausieren */
     }
 
     footer {
       margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #444;
+      font-size: 1.2rem;
+      color: #d9445f;
+      font-weight: 600;
     }
 
     audio {
@@ -104,15 +105,7 @@
 
     <h1>Alles Gute zum Geburtstag<br>liebe Oma!</h1>
 
-    <div class="subtitle">
-      Wir haben eine kleine Überraschung für dich 💖
-    </div>
-
-    <button onclick="playAudio()">▶️ Nachricht von uns abspielen</button>
-
-    <div class="hint">
-      (Einfach einmal antippen)
-    </div>
+    <button onclick="playAudio()">Nachricht abspielen</button>
 
     <footer>
       Wünschen Charlotte und Benjamin 💕
@@ -132,16 +125,16 @@
     function createConfetti(x, y) {
       const confetti = document.createElement('div');
       confetti.classList.add('confetti');
-      confetti.style.left = x + (Math.random() * 80 - 40) + 'px'; // leicht zufällig horizontal
+      confetti.style.left = x + (Math.random() * 80 - 40) + 'px';
       confetti.style.top = y + 'px';
       confetti.style.fontSize = Math.random() * 24 + 12 + 'px';
       confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
       confetti.textContent = confettiTypes[Math.floor(Math.random() * confettiTypes.length)];
       document.body.appendChild(confetti);
 
-      let vy = - (2 + Math.random() * 3); // nach oben
-      let vx = (Math.random() - 0.5) * 1.5; // leicht seitlich
-      let gravity = 0.02; // langsames Absinken
+      let vy = - (2 + Math.random() * 3);
+      let vx = (Math.random() - 0.5) * 1.5;
+      let gravity = 0.02;
       let opacity = 1;
 
       function animate() {
@@ -161,7 +154,6 @@
       const audio = document.getElementById("audio");
       audio.play();
 
-      // Herz- und Ballon-Konfetti erzeugen
       for (let i = 0; i < 50; i++) {
         createConfetti(window.innerWidth / 2, window.innerHeight / 2);
       }
