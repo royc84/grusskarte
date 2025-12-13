@@ -12,10 +12,10 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: flex-start; /* Box etwas nach unten */
       justify-content: center;
+      padding-top: 5vh; /* zusätzlicher Abstand nach oben */
       overflow: hidden;
-      /* Hintergrundbild */
       background-image: url('background.jpg');
       background-size: cover;
       background-position: center;
@@ -25,7 +25,7 @@
     .card {
       width: 100%;
       max-width: 420px;
-      background: rgba(255, 255, 255, 0.4); /* 40% transparent */
+      background: rgba(255, 255, 255, 0.4);
       border-radius: 24px;
       margin: 1rem;
       padding: 2rem 1.5rem 2.5rem;
@@ -33,18 +33,18 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
       position: relative;
       z-index: 1;
-      backdrop-filter: blur(5px); /* schöner verschwommener Hintergrund durch Transparenz */
+      backdrop-filter: blur(5px);
     }
 
     h1 {
       font-size: 1.6rem;
-      color: #e85d75;
+      color: #d9445f; /* dunkleres Rosa */
       margin-bottom: 0.5rem;
     }
 
     .subtitle {
       font-size: 1.1rem;
-      color: #555;
+      color: #444; /* dunkleres Grau */
       margin-bottom: 1.5rem;
     }
 
@@ -75,29 +75,25 @@
     .hint {
       margin-top: 1rem;
       font-size: 0.95rem;
-      color: #777;
+      color: #444;
     }
 
     footer {
       margin-top: 2rem;
       font-size: 0.9rem;
-      color: #999;
+      color: #444;
     }
 
     audio {
       display: none;
     }
 
-    /* Konfetti-Elemente */
     .confetti {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: red;
       z-index: 2;
       pointer-events: none;
       opacity: 0;
-      border-radius: 50%;
+      font-size: 20px;
     }
   </style>
 </head>
@@ -130,28 +126,29 @@
   </div>
 
   <script>
+    const confettiTypes = ['❤️','🎈'];
     const colors = ['#ff3c3c', '#ff8c42', '#fff13c', '#42ff77', '#3c90ff', '#c342ff'];
 
     function createConfetti(x, y) {
       const confetti = document.createElement('div');
       confetti.classList.add('confetti');
-      confetti.style.left = x + 'px';
+      confetti.style.left = x + (Math.random() * 80 - 40) + 'px'; // leicht zufällig horizontal
       confetti.style.top = y + 'px';
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.fontSize = Math.random() * 24 + 12 + 'px';
+      confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+      confetti.textContent = confettiTypes[Math.floor(Math.random() * confettiTypes.length)];
       document.body.appendChild(confetti);
 
-      let angle = Math.random() * 2 * Math.PI;
-      let speed = 2 + Math.random() * 4;
-      let vx = Math.cos(angle) * speed;
-      let vy = Math.sin(angle) * speed;
-      let gravity = 0.1;
+      let vy = - (2 + Math.random() * 3); // nach oben
+      let vx = (Math.random() - 0.5) * 1.5; // leicht seitlich
+      let gravity = 0.02; // langsames Absinken
       let opacity = 1;
 
       function animate() {
         vy += gravity;
         confetti.style.left = (parseFloat(confetti.style.left) + vx) + 'px';
         confetti.style.top = (parseFloat(confetti.style.top) + vy) + 'px';
-        opacity -= 0.02;
+        opacity -= 0.01;
         confetti.style.opacity = opacity;
         if (opacity > 0) requestAnimationFrame(animate);
         else confetti.remove();
@@ -164,7 +161,7 @@
       const audio = document.getElementById("audio");
       audio.play();
 
-      // Konfetti erzeugen
+      // Herz- und Ballon-Konfetti erzeugen
       for (let i = 0; i < 50; i++) {
         createConfetti(window.innerWidth / 2, window.innerHeight / 2);
       }
