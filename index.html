@@ -2,49 +2,78 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Eine Nachricht für dich 💌</title>
+  <title>Alles Gute zum Geburtstag liebe Oma!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f7f3ef;
-      color: #333;
-      text-align: center;
-      padding: 2rem;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fff3c4, #ffd6e8);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card {
+      width: 100%;
       max-width: 420px;
-      margin: auto;
       background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 24px;
+      margin: 1rem;
+      padding: 2rem 1.5rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
 
     h1 {
       font-size: 1.6rem;
-      margin-bottom: 1rem;
+      color: #e85d75;
+      margin-bottom: 0.5rem;
     }
 
-    p {
+    .subtitle {
       font-size: 1.1rem;
+      color: #555;
       margin-bottom: 1.5rem;
     }
 
-    button {
-      font-size: 1.2rem;
-      padding: 1rem 1.5rem;
-      border-radius: 999px;
-      border: none;
-      background: #ff6b6b;
-      color: white;
-      cursor: pointer;
+    .emoji {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
     }
 
-    button:hover {
-      background: #ff5252;
+    button {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 1rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #ff8a00, #ff5e8a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 94, 138, 0.4);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+      box-shadow: 0 4px 10px rgba(255, 94, 138, 0.3);
+    }
+
+    .hint {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #777;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #999;
     }
 
     audio {
@@ -55,14 +84,27 @@
 
 <body>
   <div class="card">
-    <h1>💌 Für dich</h1>
-    <p>Tippe auf den Button und höre meine Nachricht.</p>
+    <div class="emoji">🎉🎂💐</div>
 
-    <button onclick="playAudio()">▶️ Nachricht abspielen</button>
+    <h1>Alles Gute zum Geburtstag<br>liebe Oma!</h1>
+
+    <div class="subtitle">
+      Wir haben eine kleine Überraschung für dich 💖
+    </div>
+
+    <button onclick="playAudio()">▶️ Nachricht von uns abspielen</button>
+
+    <div class="hint">
+      (Einfach einmal antippen)
+    </div>
+
+    <footer>
+      Wünschen Charlotte und Benjamin 💕
+    </footer>
 
     <audio id="audio" preload="auto">
       <source src="audio.m4a" type="audio/mp4">
-      Dein Browser unterstützt keine Audio-Wiedergabe.
+      Dein Browser unterstützt leider keine Audio-Wiedergabe.
     </audio>
   </div>
 
