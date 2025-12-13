@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Eine Nachricht für dich 💌</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f7f3ef;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .card {
+      max-width: 420px;
+      margin: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 1rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      background: #ff6b6b;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff5252;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>💌 Für dich</h1>
+    <p>Tippe auf den Button und höre meine Nachricht.</p>
+
+    <button onclick="playAudio()">▶️ Nachricht abspielen</button>
+
+    <audio id="audio" preload="auto">
+      <source src="audio.m4a" type="audio/mp4">
+      Dein Browser unterstützt keine Audio-Wiedergabe.
+    </audio>
+  </div>
+
+  <script>
+    function playAudio() {
+      const audio = document.getElementById("audio");
+      audio.play();
+    }
+  </script>
+</body>
+</html>
